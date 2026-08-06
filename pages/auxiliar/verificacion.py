@@ -4,6 +4,7 @@ import numpy as np
 import streamlit as st
 import shap
 from groq import Groq
+from pathlib import Path
 
 
 
@@ -30,7 +31,9 @@ def transformar(data):
      return data
 
 def formato(columnas, data):
-     muestra = pd.read_csv(".\data\muestra.csv")
+     BASE_DIR = Path(__file__).resolve().parent.parent.parent
+     ruta_muestra = BASE_DIR / "data" / "muestra.csv"
+     muestra = pd.read_csv(ruta_muestra)
      muestra.drop(labels=["fraud", "Unnamed: 0", "Unnamed: 0.1"], axis=1, inplace=True)
      orden = muestra.columns.tolist()
      valores = np.zeros(data.shape[0])
