@@ -174,7 +174,7 @@ def explicador_groq(shap_va, transacciones, cliente=[]):
      client = Groq(api_key= st.secrets["CLAVE_API_GROQ"])
 
      completion = client.chat.completions.create(
-          model="meta-llama/llama-prompt-guard-2-22m",
+          model="openai/gpt-oss-120b",
           messages=[
                {
                     "role": "system",
@@ -188,8 +188,9 @@ def explicador_groq(shap_va, transacciones, cliente=[]):
                }
                ],
           temperature=1,
-          max_completion_tokens=1024,
+          max_completion_tokens=2048,
           top_p=1,
+          reasoning_effort="medium"
           stream=True,
           stop=None
           )
