@@ -190,7 +190,7 @@ def explicador_groq(shap_va, transacciones, cliente=[]):
           temperature=1,
           max_completion_tokens=2048,
           top_p=1,
-          reasoning_effort="medium"
+          reasoning_effort="medium",
           stream=True,
           stop=None
           )
