@@ -5,7 +5,8 @@ from pages.models.modelo import Modelo
 from joblib import load
 from pages.auxiliar.verificacion import transformar, formato, shap_global, explicador_groq
 import shap
-import os
+from pathlib import Path
+
 
 # Función para el apartado de predecir
 def predecir():
@@ -104,8 +105,11 @@ def predecir():
         if "data_transformada" in st.session_state:
                try:
                   # Predecir fraude con RandomForest
-                  bh = load(".\pages\models\RandomForestClassifierHyper.joblib")
+                  BASE_DIR = Path(__file__).resolve().parent
+                  ruta_modelo = BASE_DIR / "models" / "RandomForestClassifierHyper.joblib"
+                  bh = load(ruta_modelo)
                   modelo = Modelo(bh)
+                  
                   y_pred = modelo.predict(st.session_state["data_transformada"])
                   d = st.session_state["data"]
                   c = st.session_state["clientes"]
